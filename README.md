@@ -23,13 +23,39 @@ You only have to do this once.
 When you initiate a Stan model, the Stan script as translated into C++ source code by the `stanc` compiler. The C++ code is then compiled into an executable. This means that Stan needs a C++ compiler. On linux this is installed by default, but on Mac or Windows this may require some extra steps.
 For Windows users, `cmdstanpy` provises the function `install_cxx_toolchain()` which should do the work for you.
 
-Mac users should be able to install xcode by opening a terminal and typing
+Mac users can install `xcode` which provides a C++ compiler. To install `xcode`, open a terminal and type
 ```bash
 xcode-select --install
 ```
 
+## Other Python modules
+
+In addition to the `cmdstanpy` module, the notebooks import a number of other modules that you might have to install as well:
+
+* numpy
+* scipy
+* matplotlib
+* datetime
+* pygments
+
+Using `pip`, you can install these using the shell command
+```bash
+pip install numpy scipy matplotlib datetime pygments
+```
 
 ## Instructions for R users
 
 The R-equivalent for `cmdstanpy` is `cmdstanr`. Instructions on how to install this R package can be found [here](https://mc-stan.org/cmdstanr/).
 It might also be useful to install the `rstan` interface. See the instructions [here](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started).
+
+## Using git
+
+The contents of this repository can be downloaded using the green "code" button in the upper right corner (select "download zip"). Make sure that you get the latest version, because there will be regular updates. Another way is to use `git`. From the terminal, type
+```bash
+git clone https://github.com/chvandorp/stan-immbio.git
+```
+This will create a directory `stan-immbio` containing the content of the repository. To get the latest updates, enter the following commands (**WARNING the first line will delete any changes that you made**)
+```bash
+git reset --hard
+git pull origin main
+```
