@@ -28,6 +28,8 @@ Mac users can install `xcode` which provides a C++ compiler. To install `xcode`,
 xcode-select --install
 ```
 
+To test if your Stan installation was succesful use the notebook `InstallTest.ipynb` in the `notebooks` directory. This notebook also contains some installation instructions.
+
 ## Other Python modules
 
 In addition to the `cmdstanpy` module, the notebooks import a number of other modules that you might have to install as well:
