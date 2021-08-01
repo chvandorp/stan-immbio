@@ -5,12 +5,15 @@ This repository contains an introduction to programming with Stan for immunobiol
 ## Installing Jupyter
 
 Instructions on how to install the Jupyter notebook can be found [here](https://jupyter.org/install).
+You can choose between the simpler "classic" jupyter notebook or jupyter-lab, which has a fancier interface.
 These instructions assume that you already have Python 3 installed on your system. If that is not the
-case, the easiest way is to [install anaconda](https://www.anaconda.com/products/individual).
+case, the easiest way is to [install anaconda](https://www.anaconda.com/products/individual). On Windows,
+the Anaconda installer (using all default options) automatically installs the Jupyter notebook and creates a link in the start menu. 
+The notebook can also be "launched" from the Anaconda navigator.
 
 ## Installing Stan
 
-Detailed instructions on how to install Stan can be found on the [Stan website](www.mc-stan.org). Stan comes as a stand-alone application (cmdstan), but there are a number of interfaces that allows easy Stan access from your favourite scientific programming environment (R, Python, Julia, Matlab, etc.). In this workshop, we will mainly use Python (through the Jupyter notebook, see below) and the cmdstanpy package to interface with Stan. A similar package (cmdstanr) exists for R. Instructions on how to install cmdstanpy can be found [here](https://cmdstanpy.readthedocs.io/en/latest/getting_started.html).
+Detailed instructions on how to install Stan can be found on the [Stan website](www.mc-stan.org). Stan comes as a stand-alone application (cmdstan), but there are a number of interfaces that allows easy Stan access from your favourite scientific programming environment (R, Python, Julia, Matlab, etc.). In this workshop, we will mainly use Python (through the Jupyter notebook, see below) and the `cmdstanpy` package to interface with Stan. A similar package (cmdstanr) exists for R. Instructions on how to install cmdstanpy can be found [here](https://cmdstanpy.readthedocs.io/en/latest/getting_started.html).
 
 The cmdstanpy has a convenient function called `install_cmdstan()` which will download and install the `cmdstan` application for you automatically.
 ```py
@@ -44,6 +47,7 @@ Using `pip`, you can install these using the shell command
 ```bash
 pip install numpy scipy matplotlib datetime pygments
 ```
+The other Python interface to stan is called `pystan`, which you may find more convenient. It's definately worth a try and can be installed with `pip install pystan`.
 
 ## Instructions for R users
 
