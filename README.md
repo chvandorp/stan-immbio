@@ -15,6 +15,8 @@ The notebook can also be "launched" from the Anaconda navigator.
 
 Detailed instructions on how to install Stan can be found on the [Stan website](www.mc-stan.org). Stan comes as a stand-alone application (cmdstan), but there are a number of interfaces that allows easy Stan access from your favourite scientific programming environment (R, Python, Julia, Matlab, etc.). In this workshop, we will mainly use Python (through the Jupyter notebook, see below) and the `cmdstanpy` package to interface with Stan. A similar package (cmdstanr) exists for R. Instructions on how to install cmdstanpy can be found [here](https://cmdstanpy.readthedocs.io/en/latest/getting_started.html).
 
+Intallation steps are also given in the notebook `InstallTest.ipynb` in the `notebooks` directory.
+
 The cmdstanpy has a convenient function called `install_cmdstan()` which will download and install the `cmdstan` application for you automatically.
 ```py
 ## python shell / jupyter notebook
@@ -24,14 +26,12 @@ cmdstanpy.install_cmdstan() ## takes some time...
 You only have to do this once.
 
 When you initiate a Stan model, the Stan script as translated into C++ source code by the `stanc` compiler. The C++ code is then compiled into an executable. This means that Stan needs a C++ compiler. On linux this is installed by default, but on Mac or Windows this may require some extra steps.
-For Windows users, `cmdstanpy` provises the function `install_cxx_toolchain()` which should do the work for you.
+For Windows users, `cmdstanpy` provises the script `install_cxx_toolchain` which should do the work for you. This can be a bit tricky, so you might want to use the `InstallTest.ipynb` notebook
 
 Mac users can install `xcode` which provides a C++ compiler. To install `xcode`, open a terminal and type
 ```bash
 xcode-select --install
 ```
-
-To test if your Stan installation was succesful use the notebook `InstallTest.ipynb` in the `notebooks` directory. This notebook also contains some installation instructions.
 
 ## Other Python modules
 
