@@ -27,7 +27,7 @@ Detailed instructions on how to install Stan can be found on the [Stan website](
 conda install -c conda-forge cmdstanpy
 ```
 2. When you initiate a Stan model, the Stan script as translated into C++ source code by the `stanc` compiler. The C++ code is then compiled into an executable. This means that Stan needs a C++ compiler. On linux this is installed by default, but on Mac or Windows this may require some extra steps.
-For Windows users, `cmdstanpy` provises the script `install_cxx_toolchain` which should do the work for you.
+For Windows users, `cmdstanpy` provides the script `install_cxx_toolchain` which should do the work for you.
 In the terminal (i.e Anaconda Prompt, powershell, etc) enter the command
 ```
 python -m cmdstanpy.install_cxx_toolchain
