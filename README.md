@@ -67,6 +67,10 @@ conda install numpy scipy matplotlib datetime pygments
 ```
 Now you're all set for the webinar.
 
+## Slides
+
+The notebooks can be converted into [reveal.js](https://revealjs.com/) slides. In the Jupyter notebook, choose "file -> download as -> reveal.js". Make sure to first run all cells.
+
 ## Instructions for R users
 
 The R-equivalent for `cmdstanpy` is `cmdstanr`. Instructions on how to install this R package can be found [here](https://mc-stan.org/cmdstanr/).

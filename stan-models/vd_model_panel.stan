@@ -69,11 +69,11 @@ transformed parameters {
 }
 
 model {
-    // initial condition
+    // compute predicted VL with multiple CPU cores
     vector[sum(N)] logVLhat_concat = map_rect(calc_logVLhat, pop_par_vec, unit_par_vecs, data_reals, data_ints);
     // compute likelihood of the data
     for ( r in 1:R ) {
-        int idx = sum(N[:r-1]);
+        int idx = sum(N[:r-1]); // index for unpacking
         for ( n in 1:N[r] ) {
             VL[r, n] ~ lognormal(logVLhat_concat[idx+n], sigma);
         }
