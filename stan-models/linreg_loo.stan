@@ -6,7 +6,7 @@ data {
     int<lower=0, upper=1> NullModel;
 }
 parameters {
-    real a[NullModel ? 0 : 1]; // optional slope parameter
+    array[NullModel ? 0 : 1] real a; // optional slope parameter
     real b; // intercept
     real<lower=0> sigma; // error
 }

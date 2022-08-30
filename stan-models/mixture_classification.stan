@@ -1,6 +1,6 @@
 data {
     int N;
-    real X[N];
+    array[N] real X;
 }
 parameters {
     ordered[2] mu; // take care of identifiability

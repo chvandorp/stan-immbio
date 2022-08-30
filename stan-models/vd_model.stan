@@ -15,8 +15,8 @@ functions {
 
 data {
     int<lower=0> N; // number of observations
-    real<lower=0> ObsTime[N]; // observation times
-    real<lower=0> VL[N]; // viral load observations
+    array[N] real<lower=0> ObsTime; // observation times
+    array[N] real<lower=0> VL; // viral load observations
     real<lower=0> T0; // initial target cell concentration
 }
 
@@ -32,7 +32,7 @@ model {
     // initial condition
     vector[2] y0 = [T0, I0]';
     // solve ODE system
-    vector[2] y[N] = ode_rk45(vd_model, y0, 0.0, ObsTime, T0, d_T, beta, d_I);
+    array[N] vector[2] y = ode_rk45(vd_model, y0, 0.0, ObsTime, T0, d_T, beta, d_I);
     // compute likelihood of the data
     for ( n in 1:N ) {
         VL[n] ~ lognormal(log(y[n, 2]), sigma);
@@ -47,5 +47,5 @@ model {
 
 generated quantities {
     vector[2] y0 = [T0, I0]';
-    vector[2] yhat[N] = ode_rk45(vd_model, y0, 0.0, ObsTime, T0, d_T, beta, d_I);
+    array[N] vector[2] yhat = ode_rk45(vd_model, y0, 0.0, ObsTime, T0, d_T, beta, d_I);
 }

@@ -1,6 +1,6 @@
 data {
     int N; // number of experiments
-    int SndInfections[N]; // secondary infections
+    array[N] int SndInfections; // secondary infections
 }
 parameters {
     real<lower=0> beta; // transmission rate

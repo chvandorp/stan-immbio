@@ -1,7 +1,7 @@
 data {
     int N;
-    real TimesL[N]; // lower bounds
-    real TimesU[N]; // upper bounds
+    array[N] real TimesL; // lower bounds
+    array[N] real TimesU; // upper bounds
 }
 parameters {
     real<lower=0> alpha;

@@ -12,7 +12,7 @@ functions {
         return dy;
     }
     
-    vector calc_logVLhat(vector pop_par_vec, vector unit_par_vec, real[] data_real, int[] data_int) {
+    vector calc_logVLhat(vector pop_par_vec, vector unit_par_vec, array[] real data_real, array[] int data_int) {
         int N = data_int[1];
         // unpack parameters
         real T0 = pop_par_vec[1];
@@ -23,7 +23,7 @@ functions {
         // define unitial state
         vector[2] y0 = [T0, I0]';
         // solve ODE system
-        vector[2] y[N] = ode_rk45(vd_model, y0, 0.0, data_real[1:N], T0, d_T, beta, d_I);      
+        array[N] vector[2] y = ode_rk45(vd_model, y0, 0.0, data_real[1:N], T0, d_T, beta, d_I);      
         // extract values from solution of ODE
         return log(to_vector(y[:, 2]));
     }
@@ -31,24 +31,24 @@ functions {
 
 data {
     int<lower=0> R; // number of replicates
-    int<lower=0> N[R]; // number of observations
-    real<lower=0> ObsTime[R, max(N)]; // observation times
-    real<lower=0> VL[R, max(N)]; // viral load observations
+    array[R] int<lower=0> N; // number of observations
+    array[R, max(N)] real<lower=0> ObsTime; // observation times
+    array[R, max(N)] real<lower=0> VL; // viral load observations
     real<lower=0> T0; // initial target cell concentration
 }
 
 transformed data {
-    real data_reals[R, max(N)] = ObsTime;
-    int data_ints[R, 1];
+    array[R, max(N)] real data_reals = ObsTime;
+    array[R, 1] int data_ints;
     data_ints[:,1] = N;
 }
 
 parameters {
     // unit-specific parameters
-    real<lower=0> beta[R]; // infection rate
-    real<lower=0> d_T[R]; // death rate target cells
-    real<lower=0> d_I[R]; // death rate infected cells
-    real<lower=0> I0[R]; // initial number of infected cells
+    array[R] real<lower=0> beta; // infection rate
+    array[R] real<lower=0> d_T; // death rate target cells
+    array[R] real<lower=0> d_I; // death rate infected cells
+    array[R] real<lower=0> I0; // initial number of infected cells
     
     // pop-level parameters
     real m_beta; real<lower=0> s_beta;
@@ -61,7 +61,7 @@ parameters {
 
 transformed parameters {
     vector[1] pop_par_vec = rep_vector(T0, 1);
-    vector[4] unit_par_vecs[R];
+    array[R] vector[4] unit_par_vecs;
     unit_par_vecs[:,1] = beta;
     unit_par_vecs[:,2] = d_T;
     unit_par_vecs[:,3] = d_I;
@@ -93,10 +93,10 @@ generated quantities {
     real ppd_d_I = lognormal_rng(m_d_I, s_d_I);
     real ppd_I0 = lognormal_rng(m_I0, s_I0);
     // viral load predictions
-    real VLhat[R, max(N)];
+    array[R, max(N)] real VLhat;
     for ( r in 1:R ) {
         vector[2] y0 = [T0, I0[r]]';
-        vector[2] yhat[N[r]] = ode_rk45(vd_model, y0, 0.0, ObsTime[r, 1:N[r]], T0, d_T[r], beta[r], d_I[r]);
+        array[N[r]] vector[2] yhat = ode_rk45(vd_model, y0, 0.0, ObsTime[r, 1:N[r]], T0, d_T[r], beta[r], d_I[r]);
         VLhat[r,1:N[r]] = yhat[:, 2];
     }
 }

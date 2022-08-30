@@ -1,7 +1,7 @@
 data {
     int<lower=0> N;
     int<lower=0> K;
-    int<lower=0> Counts[N, K];
+    array[N, K] int<lower=0> Counts;
     vector[N] Time;
 }
 parameters {
@@ -14,12 +14,12 @@ transformed parameters {
 }
 model {
     for ( i in 1:N ) {
-    vector[N] logit_p = alpha * Time[i] + beta;
+        vector[K] logit_p = alpha * Time[i] + beta;
         Counts[i,:] ~ multinomial_logit(logit_p);
     }
 }
 generated quantities {
-    vector[K] p_hat[N];
+    array[N] vector[K] p_hat;
     for ( i in 1:N ) {
         p_hat[i,:] = softmax(alpha * Time[i] + beta);
     }

@@ -1,11 +1,11 @@
 data {
     int<lower=0> N; // number of rows
-    int<lower=0> M[N]; // number of elements per row
-    real X[N, max(M)]; // padded array
+    array[N] int<lower=0> M; // number of elements per row
+    array[N, max(M)] real X; // padded array
 }
 parameters {
-    real mu[N]; // group means
-    real<lower=0> sigma[N]; // group standard deviation
+    array[N] real mu; // group means
+    array[N] real<lower=0> sigma; // group standard deviation
 }
 model {
     // access data
